@@ -72,7 +72,7 @@ MAX_POSITION = 10000
 # Use to guarantee a maker rebate.
 # However -- orders that would have matched immediately will instead cancel, and you may end up with
 # unexpected delta. Be careful.
-POST_ONLY = False
+POST_ONLY = True
 
 ########################################################################################################################
 # Misc Behavior, Technicals
@@ -108,7 +108,11 @@ LOG_LEVEL = logging.INFO
 ORDERID_PREFIX = "mm_bitmex_"
 
 # If any of these files (and this file) changes, reload the bot.
-WATCHED_FILES = [join('market_maker', 'market_maker.py'), join('market_maker', 'bitmex.py'), 'settings.py']
+WATCHED_FILES = [
+    join("market_maker", "market_maker.py"),
+    join("market_maker", "bitmex.py"),
+    "settings.py",
+]
 
 
 ########################################################################################################################
@@ -116,4 +120,4 @@ WATCHED_FILES = [join('market_maker', 'market_maker.py'), join('market_maker', '
 ########################################################################################################################
 
 # Specify the contracts that you hold. These will be used in portfolio calculations.
-CONTRACTS = ['XBTUSD']
+CONTRACTS = ["XBTUSD"]

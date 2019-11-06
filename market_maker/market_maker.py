@@ -17,6 +17,10 @@ import os
 watched_files_mtimes = [(f, getmtime(f)) for f in settings.WATCHED_FILES]
 
 
+from market_maker.main import Ui
+from PyQt5 import QtWidgets, uic
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QLineEdit, QVBoxLayout
+
 #
 # Helpers
 #
@@ -198,9 +202,11 @@ class ExchangeInterface:
         return self.bitmex.cancel([order['orderID'] for order in orders])
 
 
-class OrderManager:
+class OrderManager():
     def __init__(self):
+        print('Order manager init')
         self.exchange = ExchangeInterface(settings.DRY_RUN)
+        print('before reset')
         # Once exchange is created, register exit handler that will always cancel orders
         # on any error.
         atexit.register(self.exit)
@@ -217,7 +223,15 @@ class OrderManager:
         self.instrument = self.exchange.get_instrument()
         self.starting_qty = self.exchange.get_delta()
         self.running_qty = self.starting_qty
+        
         self.reset()
+
+
+
+    # def start123(self):
+    #     # app = QtWidgets.QApplication(sys.argv)
+    #     window = Ui()
+    #     self.app.exec_()
 
     def reset(self):
         self.exchange.cancel_all_orders()
@@ -487,7 +501,7 @@ class OrderManager:
     def exit(self):
         logger.info("Shutting down. All open orders will be cancelled.")
         try:
-            self.exchange.cancel_all_orders()
+            # self.exchange.cancel_all_orders() #CHANGED
             self.exchange.bitmex.exit()
         except errors.AuthenticationError as e:
             logger.info("Was not authenticated; could not cancel orders.")

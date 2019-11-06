@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, uic
 import sys
-from PyQt5.QtWidgets import QPushButton, QRadioButton, QLineEdit, QVBoxLayout
+from PyQt5.QtWidgets import QPushButton, QRadioButton, QLineEdit, QVBoxLayout, QLabel
 
 
 class Ui(QtWidgets.QMainWindow):
@@ -14,6 +14,11 @@ class Ui(QtWidgets.QMainWindow):
         self.end = self.findChild(QLineEdit, "end")
         self.side = "Sell"
         self.distribution = "uniform"
+        self.symbol = "XBTUSD"
+
+        # self.error = self.findChild(QLabel, 'currentPrice').text()
+
+        self.error = self.findChild(QLabel, "currentPrice")
         # =================================================
         self.submitButton = self.findChild(QPushButton, "submit")
         self.submitButton.clicked.connect(self.submitOrder)
@@ -62,7 +67,7 @@ class Ui(QtWidgets.QMainWindow):
         self.show()  # Show the GUI
 
     def submitOrder(self):
-        print(f"pressed button {self.side} {self.distribution}")
+        print(f"pressed button {self.start.text()} {self.distribution}")
 
     def __setSide(self, radio):
         if radio.text() == "Sell" and radio.isChecked():
@@ -71,13 +76,13 @@ class Ui(QtWidgets.QMainWindow):
             self.side = radio.text()
 
     def __setDistribution(self, radio):
-        if radio.text() == "Uniform" and radio.isChecked():
+        if radio.text() == "uniform" and radio.isChecked():
             self.distribution = radio.text()
-        elif radio.text() == "Normal" and radio.isChecked():
+        elif radio.text() == "normal" and radio.isChecked():
             self.distribution = radio.text()
-        elif radio.text() == "Positive" and radio.isChecked():
+        elif radio.text() == "positive" and radio.isChecked():
             self.distribution = radio.text()
-        elif radio.text() == "Negative" and radio.isChecked():
+        elif radio.text() == "negative" and radio.isChecked():
             self.distribution = radio.text()
 
 

@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "c:\\Users\\Vecordis\\Documents\\GitHub\\BitMEX-trading-tool\\trading-tool\\Scripts\\python.exe",
+    "python.pythonPath": "trading-tool\\Scripts\\python.exe",
     "python.formatting.provider": "black"
 }
